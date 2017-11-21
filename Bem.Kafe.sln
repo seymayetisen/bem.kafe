@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafeYonetim.Lib", "Kafe.Lib\KafeYonetim.Lib.csproj", "{EF0C8B96-31E9-42F5-8112-CCC782C67033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafeYonetim.Data", "KafeYonetim.Data\KafeYonetim.Data.csproj", "{3BBF4B8D-8A14-49FB-923B-FB532CCF3F1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafeYonetim.Sunum.AnaUygulama", "KafeYonetim.Sunum.AnaUygulama\KafeYonetim.Sunum.AnaUygulama.csproj", "{F25FC74C-7CDE-40AC-B456-8BF8A1099EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafeYonetim.Sunum.ConsoleApp", "KafeYonetim.Sunum.ConsoleApp\KafeYonetim.Sunum.ConsoleApp.csproj", "{50B9C421-5F22-400C-848C-92344E354105}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF0C8B96-31E9-42F5-8112-CCC782C67033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0C8B96-31E9-42F5-8112-CCC782C67033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0C8B96-31E9-42F5-8112-CCC782C67033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0C8B96-31E9-42F5-8112-CCC782C67033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BBF4B8D-8A14-49FB-923B-FB532CCF3F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBF4B8D-8A14-49FB-923B-FB532CCF3F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBF4B8D-8A14-49FB-923B-FB532CCF3F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBF4B8D-8A14-49FB-923B-FB532CCF3F1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25FC74C-7CDE-40AC-B456-8BF8A1099EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25FC74C-7CDE-40AC-B456-8BF8A1099EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25FC74C-7CDE-40AC-B456-8BF8A1099EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25FC74C-7CDE-40AC-B456-8BF8A1099EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B9C421-5F22-400C-848C-92344E354105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B9C421-5F22-400C-848C-92344E354105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B9C421-5F22-400C-848C-92344E354105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B9C421-5F22-400C-848C-92344E354105}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
