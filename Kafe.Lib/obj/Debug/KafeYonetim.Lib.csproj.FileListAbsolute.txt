@@ -1,4 +1,0 @@
-C:\Users\BEM\Source\Repos\bem.kafe\Kafe.Lib\bin\Debug\KafeYonetim.Lib.dll
-C:\Users\BEM\Source\Repos\bem.kafe\Kafe.Lib\bin\Debug\KafeYonetim.Lib.pdb
-C:\Users\BEM\Source\Repos\bem.kafe\Kafe.Lib\obj\Debug\KafeYonetim.Lib.dll
-C:\Users\BEM\Source\Repos\bem.kafe\Kafe.Lib\obj\Debug\KafeYonetim.Lib.pdb
