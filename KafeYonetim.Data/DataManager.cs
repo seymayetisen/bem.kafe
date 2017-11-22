@@ -8,7 +8,7 @@ namespace KafeYonetim.Data
 
     public class DataManager
     {
-        private static string connStr = "Data Source=DESKTOP-S3O5AOR;Initial Catalog=kafeYönetim;Integrated Security=True";
+        private static string connStr = "Data Source=DESKTOP-S3O5AOR;Initial Catalog=KafeYonetim;Integrated Security=True";
 
         private static SqlConnection CreateConnection()
         {
@@ -94,14 +94,15 @@ namespace KafeYonetim.Data
             }
         }
 
-        public static int CalisanSayisi()
+        public static object CalisanSayisiniGetir()
         {
-            using (SqlConnection connection=CreateConnection())
+            using (var connection = CreateConnection())
             {
-                SqlCommand command = new SqlCommand("select count(*) from Calisan", connection);
-               
-                int sayi = (int)command.ExecuteScalar();
-                return sayi;
+                var command = new SqlCommand("SELECT COUNT(*) FROM Calisan", connection);
+
+                int result = Convert.ToInt32(command.ExecuteScalar());
+
+                return result;
             }
         }
 

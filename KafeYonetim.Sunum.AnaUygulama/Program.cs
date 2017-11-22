@@ -47,42 +47,39 @@ namespace KafeYonetim.Sunum.AnaUygulama
                 Console.WriteLine("9. Asçı Ekle");
                 Console.WriteLine("10. Bulaşıkçı Ekle");
                 Console.WriteLine("11. Çalışanları Listele");
-                Console.WriteLine("12. Çalışan sayisi");
-
+                Console.WriteLine("12. Çalışan Sayısını Getir");
                 Console.WriteLine();
                 Console.Write("Bir seçim yapınız (çıkmak için H harfine basınız): ");
                 var secim = Console.ReadLine();
 
                 switch (secim)
                 {
-                    case "1":  ButunUrunlerListesiniYazdir(); Console.ReadLine(); break;
-                    case "2":  DegerdenYuksekFiyatliUrunleriGetir(); break;
-                    case "3":  UrunGir(); break;
-                    case "4":  StoktaOlmayanUrunleriListele(); break;
-                    case "5":  UrunSil(); break;
-                    case "6":  MasaEkle(); break;
-                    case "7":  MasaSayisi(); break;
-                    case "8":  GarsonEkle(); break;
-                    case "9":  AsciEkle(); break;
+                    case "1": ButunUrunlerListesiniYazdir(); Console.ReadLine(); break;
+                    case "2": DegerdenYuksekFiyatliUrunleriGetir(); break;
+                    case "3": UrunGir(); break;
+                    case "4": StoktaOlmayanUrunleriListele(); break;
+                    case "5": UrunSil(); break;
+                    case "6": MasaEkle(); break;
+                    case "7": MasaSayisi(); break;
+                    case "8": GarsonEkle(); break;
+                    case "9": AsciEkle(); break;
                     case "10": BulasikciEkle(); break;
                     case "11": CalisanListesiniGetir(); break;
-                    case "12": CalisanSayisi(); break;
-
-
+                    case "12": CalisanSayisiniGetir(); break;
                     case "h": return;
                     default:
                         break;
                 }
 
             } while (true);
-
         }
 
-        private static void CalisanSayisi()
+        private static void CalisanSayisiniGetir()
         {
             Console.Clear();
-           int sayi= DataManager.CalisanSayisi();
-            Console.WriteLine($"çalışanların sayisi : {sayi}");
+            var calisanSayisi = DataManager.CalisanSayisiniGetir();
+
+            Console.WriteLine($"Toplam {calisanSayisi} çalışan var.");
             Console.ReadLine();
         }
 
