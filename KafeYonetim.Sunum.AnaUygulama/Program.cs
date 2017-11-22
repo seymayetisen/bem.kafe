@@ -47,7 +47,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
                 Console.WriteLine("9. Asçı Ekle");
                 Console.WriteLine("10. Bulaşıkçı Ekle");
                 Console.WriteLine("11. Çalışanları Listele");
-                Console.WriteLine("12. Çalışanları Listele");
+                Console.WriteLine("12. Çalışan Sayısını Getir");
                 Console.WriteLine();
                 Console.Write("Bir seçim yapınız (çıkmak için H harfine basınız): ");
                 var secim = Console.ReadLine();
