@@ -49,6 +49,8 @@ namespace KafeYonetim.Sunum.AnaUygulama
                 Console.WriteLine("11. Çalışanları Listele");
                 Console.WriteLine("12. Çalışan Sayısını Getir");
                 Console.WriteLine("13. Garson Listele");
+                Console.WriteLine("14. sayfalama");
+
                 Console.WriteLine();
                 Console.Write("Bir seçim yapınız (çıkmak için H harfine basınız): ");
                 var secim = Console.ReadLine();
@@ -68,12 +70,53 @@ namespace KafeYonetim.Sunum.AnaUygulama
                     case "11": CalisanListesiniGetir(); break;
                     case "12": CalisanSayisiniGetir(); break;
                     case "13": GarsonListele(); break;
+                    case "14": Sayfalama(); break;
+
                     case "h": return;
                     default:
                         break;
                 }
 
             } while (true);
+        }
+
+        private static void Sayfalama()
+        {
+            Console.Clear();
+            
+            
+            
+            int toplamSayfaSayisi = DataManager.sayfaSayisiniBul();
+            
+            do
+            {
+                Console.WriteLine("sayfa numaraları: ");
+                for (int i = 1; i <= toplamSayfaSayisi; i++)
+                {
+                    Console.Write($"{i} \t");
+                }
+                Console.WriteLine();
+                Console.WriteLine("sayfa numarasi giriniz :");
+                int sayfanumarasi=int.Parse(Console.ReadLine());
+                int elemanSayisi = 20;
+               
+                Console.Clear();
+                
+                if (sayfanumarasi>=1 &&sayfanumarasi<=toplamSayfaSayisi)
+                {
+                    List<Asci> ascilar = DataManager.Sayfalama(((sayfanumarasi - 1) * elemanSayisi) + 1, sayfanumarasi * elemanSayisi);
+                    foreach (var item in ascilar)
+                    {
+                        Console.WriteLine($"{item.Isim.PadRight(30)}{item.IseGirisTarihi.ToString("dd.MM.yyyy").PadRight(30)}{item.Puan}");
+                    }
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("girilmesi gereken aralıkta girmediniz...");
+                }
+            } while (true);
+           
         }
 
         private static void GarsonListele()

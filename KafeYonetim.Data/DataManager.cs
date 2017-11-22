@@ -94,6 +94,42 @@ namespace KafeYonetim.Data
             }
         }
 
+        public static int sayfaSayisiniBul()
+        {
+            using (SqlConnection conn = CreateConnection())
+            {
+                SqlCommand command = new SqlCommand("select Ceiling(count(*)/20.0) from Calisan where Calisan.GorevId=1", conn);
+                int sayi = Convert.ToInt32(command.ExecuteScalar());
+                return sayi;
+            }
+        }
+
+        public static List<Asci> Sayfalama(int sayi1,int sayi2)
+        {
+            using (var conn = CreateConnection())
+            {
+                var command = new SqlCommand($"SELECT * FROM(SELECT ROW_NUMBER() OVER(ORDER BY c.Isim) AS rownum, c.Isim, c.IseGirisTarihi, a.Puan, c.GorevId  from Calisan c inner join Gorev g on c.GorevId = g.id inner join asci a on c.GorevTabloId = a.id  where g.id = 1) AS Salaries1 WHERE  rownum >= {sayi1} AND rownum <= {sayi2}", conn);
+
+                var list = new List<Asci>();
+               
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var asci = new Asci(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], AktifKafeyiGetir());
+                        asci.Puan = Convert.ToInt32(reader["Puan"]);
+
+                        list.Add(asci);
+                       
+
+                    }
+
+                    return list;
+                }
+            }
+        }
+
         public static List<Garson> GarsonBilgileriniGetir()
         {
             using (SqlConnection connection=CreateConnection())

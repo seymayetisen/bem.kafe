@@ -21,7 +21,7 @@ namespace KafeYonetim.Lib
 
         public void GarsonCagir()
         {
-            if(!(Garson is null))
+            if(!(Garson ==null))
             {
                 return;
             }
