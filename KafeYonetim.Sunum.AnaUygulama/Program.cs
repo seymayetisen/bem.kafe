@@ -72,7 +72,6 @@ namespace KafeYonetim.Sunum.AnaUygulama
                 }
 
             } while (true);
-
         }
 
         private static void CalisanSayisiniGetir()
