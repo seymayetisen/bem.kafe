@@ -12,7 +12,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
     {
         static void Main(string[] args)
         {
-            //
+            //kjlkjklj
             //DataManager.KafeBilgisiniYazdir();
             //
             //UrunListesiniYazdir();
