@@ -8,7 +8,7 @@ namespace KafeYonetim.Data
 
     public class DataManager
     {
-        private static string connStr = "Data Source=DESKTOP-S3O5AOR;Initial Catalog=KafeYonetim;Integrated Security=True";
+        private static string connStr = "Data Source=DESKTOP-S3O5AOR;Initial Catalog=kafeYönetim;Integrated Security=True";
 
         private static SqlConnection CreateConnection()
         {
@@ -27,7 +27,7 @@ namespace KafeYonetim.Data
                 using (var result = command.ExecuteReader())
                 {
                     result.Read();
-                    var kafe = new Kafe((int)result["Id"], result["Ad"].ToString(), result["AcilisSaati"].ToString(), result["KapanisSaati"].ToString());
+                    var kafe = new Kafe((int)result["id"], result["Ad"].ToString(), result["AcilisSaati"].ToString(), result["KapanisSaati"].ToString());
                     kafe.Durum = (KafeDurum)result["Durum"];
 
                     return kafe;
@@ -94,6 +94,29 @@ namespace KafeYonetim.Data
             }
         }
 
+        public static List<Garson> GarsonBilgileriniGetir()
+        {
+            using (SqlConnection connection=CreateConnection())
+            {
+                SqlCommand command = new SqlCommand("select c.Isim,c.IseGirisTarihi,ga.bahsis from Calisan c inner join Gorev g on c.GorevId = g.id inner join garson ga on c.GorevTabloId = ga.id where g.id = 2", connection);
+                List<Garson> garsonlar = new List<Garson>();
+                using (SqlDataReader result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        Garson calisan = new Garson(result["Isim"].ToString(), (DateTime)result["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
+                        calisan.Bahsis = (double)result["bahsis"];
+
+                        garsonlar.Add(calisan);
+                    }
+
+                }
+                return garsonlar;
+                
+
+            }
+        }
+
         public static object CalisanSayisiniGetir()
         {
             using (var connection = CreateConnection())
@@ -108,26 +131,22 @@ namespace KafeYonetim.Data
 
         public static List<Calisan> CalisanListesiniGetir()
         {
-            using (var connection = CreateConnection())
+            using (SqlConnection connection = CreateConnection())
             {
-                var command = new SqlCommand("CalisanListesiniGetir", connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                using (var reader = command.ExecuteReader())
+                List<Calisan> Calisanlar = new List<Calisan>();
+                SqlCommand command = new SqlCommand("select Calisan.Isim,Calisan.IseGirisTarihi,Gorev.GorevAdi from Calisan inner join Gorev on Calisan.GorevId=Gorev.id", connection);
+                using (SqlDataReader result = command.ExecuteReader())
                 {
-                    var list = new List<Calisan>();
-
-                    while (reader.Read())
+                    while (result.Read())
                     {
-                        var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
+                        //Gorev gorev = new Gorev(result["GorevAdi"].ToString());
+                        Calisan calisan = new Calisan(result["Isim"].ToString(), (DateTime)result["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
+                        calisan.Gorev.GorevAdi = result["GorevAdi"].ToString();
 
-                        calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
-
-                        list.Add(calisan);
+                        Calisanlar.Add(calisan);
                     }
-
-                    return list;
                 }
+                return Calisanlar;
             }
         }
 
