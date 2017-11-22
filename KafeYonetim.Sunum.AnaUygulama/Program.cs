@@ -23,6 +23,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
 
             //dataManager.DegerdenYuksekFiyatliUrunleriGetir();
 
+            //
 
             // dataManager.KapatilmamimsBaglanti();
 
