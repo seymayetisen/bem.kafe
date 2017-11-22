@@ -48,9 +48,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
                 Console.WriteLine("10. Bulaşıkçı Ekle");
                 Console.WriteLine("11. Çalışanları Listele");
                 Console.WriteLine("12. Çalışan Sayısını Getir");
-                Console.WriteLine("13. Garson bilgilerini getir");
-
-
+                Console.WriteLine("13. Garson Listele");
                 Console.WriteLine();
                 Console.Write("Bir seçim yapınız (çıkmak için H harfine basınız): ");
                 var secim = Console.ReadLine();
@@ -69,8 +67,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
                     case "10": BulasikciEkle(); break;
                     case "11": CalisanListesiniGetir(); break;
                     case "12": CalisanSayisiniGetir(); break;
-                    case "13": GarsonBilgileriniGetir(); break;
-
+                    case "13": GarsonListele(); break;
                     case "h": return;
                     default:
                         break;
@@ -79,20 +76,24 @@ namespace KafeYonetim.Sunum.AnaUygulama
             } while (true);
         }
 
-        private static void GarsonBilgileriniGetir()
+        private static void GarsonListele()
         {
             Console.Clear();
-            List<Garson> calisan = DataManager.GarsonBilgileriniGetir();
-            foreach (var item in calisan)
-            {
-                Console.WriteLine();
-                Console.Write($"{item.Isim.ToString().PadRight(15)}");
-                Console.Write($"{item.IseGirisTarihi.ToString().PadRight(25)}");
-                Console.Write($"{item.Bahsis.ToString().PadRight(30)}");
-                
-            }
-            Console.ReadLine();
 
+            Console.Write("İsim".PadRight(30));
+            Console.Write("İşe Giriş Tarihi".PadRight(30));
+            Console.Write("Bahşiş".PadRight(5));
+
+            Console.WriteLine("".PadRight(60, '='));
+
+            List<Garson> garsonlar = DataManager.GarsonListele();
+
+            foreach (var garson in garsonlar)
+            {
+                Console.WriteLine($"{garson.Isim.PadRight(30)}{garson.IseGirisTarihi.ToString("dd.MM.yyyy").PadRight(30)}{garson.Bahsis}");
+            }
+
+            Console.ReadLine();
         }
 
         private static void CalisanSayisiniGetir()
