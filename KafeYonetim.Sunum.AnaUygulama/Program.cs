@@ -12,7 +12,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
     {
         static void Main(string[] args)
         {
-
+            //
             //DataManager.KafeBilgisiniYazdir();
 
             //UrunListesiniYazdir();
@@ -82,7 +82,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
 
             Console.Write("İsim".PadRight(30));
             Console.Write("İşe Giriş Tarihi".PadRight(30));
-            Console.Write("Bahşiş".PadRight(5));
+            Console.WriteLine("Bahşiş".PadRight(5));
 
             Console.WriteLine("".PadRight(60, '='));
 
@@ -92,6 +92,9 @@ namespace KafeYonetim.Sunum.AnaUygulama
             {
                 Console.WriteLine($"{garson.Isim.PadRight(30)}{garson.IseGirisTarihi.ToString("dd.MM.yyyy").PadRight(30)}{garson.Bahsis}");
             }
+            Console.WriteLine();
+            Console.WriteLine("Garson Sayısı: 3");
+            Console.WriteLine("Toplam Bahşiş: 30");
 
             Console.ReadLine();
         }
