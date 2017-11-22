@@ -31,7 +31,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
             //UrunGir();
 
             //DegerdenYuksekFiyatliUrunleriGetir();
-
+            //1
             do
             {
                 Console.Clear();
