@@ -14,7 +14,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
         {
 
             //DataManager.KafeBilgisiniYazdir();
-
+            //
             //UrunListesiniYazdir();
 
             //dataManager.KafeAdiniGetir();
