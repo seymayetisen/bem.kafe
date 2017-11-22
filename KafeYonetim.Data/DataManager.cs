@@ -129,13 +129,16 @@ namespace KafeYonetim.Data
             }
         }
 
-        public static List<Garson> GarsonListele()
+        public static Tuple<List<Garson>, int,double> GarsonListele()
         {
             using (var conn = CreateConnection())
             {
-                var command = new SqlCommand("SELECT Isim , IseGirisTarihi, Bahsis FROM Calisan INNER JOIN Garson ON Calisan.GorevTabloId = Garson.Id WHERE Calisan.GorevId = 2", conn);
+                var command = new SqlCommand("select c.Isim,c.IseGirisTarihi,ga.bahsis from Calisan c inner join Gorev g on c.GorevId = g.id inner join garson ga on c.GorevTabloId = ga.id where g.id = 2", conn);
 
-                var list = new List<Garson>();
+                 var list = new List<Garson>();
+                int sayi=0;
+                double toplamBahsis = 0;
+
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -145,9 +148,12 @@ namespace KafeYonetim.Data
                         garson.Bahsis = Convert.ToInt32(reader["Bahsis"]);
 
                         list.Add(garson);
-                    }
+                        sayi++;
+                        toplamBahsis = toplamBahsis + garson.Bahsis;
 
-                    return list;
+                    }
+                                                                                                                                  
+                    return new Tuple<List<Garson>, int,double>(list,sayi,toplamBahsis);
                 }
             }
         }

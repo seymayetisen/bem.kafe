@@ -79,19 +79,25 @@ namespace KafeYonetim.Sunum.AnaUygulama
         private static void GarsonListele()
         {
             Console.Clear();
+            
 
             Console.Write("İsim".PadRight(30));
             Console.Write("İşe Giriş Tarihi".PadRight(30));
             Console.Write("Bahşiş".PadRight(5));
+            Console.WriteLine();
+            Console.WriteLine("".PadRight(80, '='));
 
-            Console.WriteLine("".PadRight(60, '='));
+            Tuple<List<Garson>, int,double> getir = DataManager.GarsonListele();
+            //List<Garson> garsonlar = DataManager.GarsonListele();
 
-            List<Garson> garsonlar = DataManager.GarsonListele();
-
-            foreach (var garson in garsonlar)
+            foreach (var garson in getir.Item1)
             {
                 Console.WriteLine($"{garson.Isim.PadRight(30)}{garson.IseGirisTarihi.ToString("dd.MM.yyyy").PadRight(30)}{garson.Bahsis}");
+                
             }
+            Console.WriteLine();
+            Console.WriteLine($"garson sayisi : {getir.Item2}");
+            Console.WriteLine($"toplam bahsis : {getir.Item3}");
 
             Console.ReadLine();
         }
