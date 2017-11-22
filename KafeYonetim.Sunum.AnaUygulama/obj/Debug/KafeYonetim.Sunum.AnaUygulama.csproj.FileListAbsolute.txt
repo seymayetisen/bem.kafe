@@ -18,13 +18,3 @@ C:\Users\BEM\Source\Repos\Bem.Kafe\Bem.Kafe\KafeYonetim.Sunum.AnaUygulama\bin\De
 C:\Users\BEM\Source\Repos\Bem.Kafe\Bem.Kafe\KafeYonetim.Sunum.AnaUygulama\obj\Debug\KafeYonetim.Sunum.AnaUygulama.csprojResolveAssemblyReference.cache
 C:\Users\BEM\Source\Repos\Bem.Kafe\Bem.Kafe\KafeYonetim.Sunum.AnaUygulama\obj\Debug\KafeYonetim.Sunum.AnaUygulama.exe
 C:\Users\BEM\Source\Repos\Bem.Kafe\Bem.Kafe\KafeYonetim.Sunum.AnaUygulama\obj\Debug\KafeYonetim.Sunum.AnaUygulama.pdb
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Sunum.AnaUygulama.exe.config
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Sunum.AnaUygulama.exe
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Sunum.AnaUygulama.pdb
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Data.dll
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Lib.dll
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Lib.pdb
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\bin\Debug\KafeYonetim.Data.pdb
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\obj\Debug\KafeYonetim.Sunum.AnaUygulama.csprojResolveAssemblyReference.cache
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\obj\Debug\KafeYonetim.Sunum.AnaUygulama.exe
-C:\Users\BEM\Source\Repos\bem.kafe\KafeYonetim.Sunum.AnaUygulama\obj\Debug\KafeYonetim.Sunum.AnaUygulama.pdb
