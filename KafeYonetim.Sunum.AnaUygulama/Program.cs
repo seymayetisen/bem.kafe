@@ -12,26 +12,6 @@ namespace KafeYonetim.Sunum.AnaUygulama
     {
         static void Main(string[] args)
         {
-            //kjlkjklj
-            //DataManager.KafeBilgisiniYazdir();
-            //
-            //UrunListesiniYazdir();
-
-            //dataManager.KafeAdiniGetir();
-
-            //DataManager.UrunFiyatiniGetir();
-
-            //dataManager.DegerdenYuksekFiyatliUrunleriGetir();
-
-
-            // dataManager.KapatilmamimsBaglanti();
-
-            //dataManager.SecilenUrunleriSil();
-
-            //UrunGir();
-
-            //DegerdenYuksekFiyatliUrunleriGetir();
-            //1
             do
             {
                 Console.Clear();
@@ -84,7 +64,7 @@ namespace KafeYonetim.Sunum.AnaUygulama
             Console.Write("İşe Giriş Tarihi".PadRight(30));
             Console.WriteLine("Bahşiş".PadRight(5));
 
-            Console.WriteLine("".PadRight(60, '='));
+            Console.WriteLine("".PadRight(80, '='));
 
             List<Garson> garsonlar = DataManager.GarsonListele();
 
@@ -92,9 +72,12 @@ namespace KafeYonetim.Sunum.AnaUygulama
             {
                 Console.WriteLine($"{garson.Isim.PadRight(30)}{garson.IseGirisTarihi.ToString("dd.MM.yyyy").PadRight(30)}{garson.Bahsis}");
             }
+
+            int garsonSayisi = DataManager.GarsonSayisi();
+            double bahsis = DataManager.GarsonBahsisToplami();
             Console.WriteLine();
-            Console.WriteLine("Garson Sayısı: 3");
-            Console.WriteLine("Toplam Bahşiş: 30");
+            Console.WriteLine($"Garson Sayısı: {garsonSayisi}");
+            Console.WriteLine($"Toplam Bahşiş: {bahsis}");
 
             Console.ReadLine();
         }
@@ -127,22 +110,48 @@ namespace KafeYonetim.Sunum.AnaUygulama
 
         private static void CalisanListesiniGetir()
         {
-            Console.Clear();
 
             List<Calisan> liste = DataManager.CalisanListesiniGetir();
+            int toplamSayfaSayisi = DataManager.CalisanSayfaSayisiniGetir();
+            int sayfaNumarasi = 1;
 
-            Console.Write("Id".PadRight(5));
-            Console.Write("İsim".PadRight(30));
-            Console.Write("İşe Giriş Tarihi".PadRight(20));
-            Console.WriteLine("Görev");
-            Console.WriteLine("".PadRight(60, '='));
-
-            foreach (var calisan in liste)
+            while (true)
             {
-                Console.WriteLine($"{calisan.Id.ToString().PadRight(5)}{calisan.Isim.PadRight(30)}{calisan.IseGirisTarihi.ToString("yyyy.MMMM.dddd").PadRight(20)}{calisan.Gorev.GorevAdi}");
-            }
+                Console.Clear();
 
-            Console.ReadLine();
+                Console.Write("Id".PadRight(5));
+                Console.Write("İsim".PadRight(30));
+                Console.Write("İşe Giriş Tarihi".PadRight(20));
+                Console.WriteLine("Görev");
+                Console.WriteLine("".PadRight(60, '='));
+
+                foreach (var calisan in liste)
+                {
+                    Console.WriteLine($"{calisan.Id.ToString().PadRight(5)}{calisan.Isim.PadRight(30)}{calisan.IseGirisTarihi.ToString("yyyy.MMMM.dddd").PadRight(20)}{calisan.Gorev.GorevAdi}");
+                }
+
+                Console.WriteLine($"Sayfa: {sayfaNumarasi}/{toplamSayfaSayisi}");
+                Console.Write("Sayfa numarası giriniz (çıkmak için h/H harfine basınız): ");
+
+                var girdi = Console.ReadLine().ToUpper();
+
+                if(girdi == "H")
+                {
+                    break;
+                }
+
+                sayfaNumarasi = Convert.ToInt32(girdi);
+
+                if(sayfaNumarasi < 1 || sayfaNumarasi > toplamSayfaSayisi)
+                {
+                    Console.WriteLine("Lütfen Geçerli bir sayfa numarası girin.");
+                    continue;
+                }
+
+                liste = DataManager.CalisanListesiniGetir(sayfaNumarasi);
+
+            }
+            
         }
 
         private static void AsciEkle()
