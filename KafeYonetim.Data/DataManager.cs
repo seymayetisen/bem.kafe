@@ -94,6 +94,32 @@ namespace KafeYonetim.Data
             }
         }
 
+        public static List<Calisan> CalisanListesiniIsmeGoreFiltrele(string metin)
+        {
+            using (var connection = CreateConnection())
+            {
+                var command = new SqlCommand("SELECT Calisan.*, CalisanGorev.GorevAdi FROM Calisan INNER JOIN CalisanGorev ON Calisan.GorevId = CalisanGorev.Id WHERE Calisan.Isim LIKE '%'+@metin+'%'", connection);
+
+                command.Parameters.AddWithValue("@metin", metin);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    var list = new List<Calisan>();
+
+                    while (reader.Read())
+                    {
+                        var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
+
+                        calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
+
+                        list.Add(calisan);
+                    }
+
+                    return list;
+                }
+            }
+        }
+
         public static double GarsonBahsisToplami()
         {
             using (var connection = CreateConnection())
