@@ -8,7 +8,7 @@ namespace KafeYonetim.Data
 
     public class DataManager
     {
-        private static string connStr = "Data Source=DESKTOP-S3O5AOR;Initial Catalog=KafeYonetim;Integrated Security=True";
+        private static string connStr = "Data Source=DESKTOP-SON6OA8;Initial Catalog=kafeYönetim;Integrated Security=True";
 
         private static SqlConnection CreateConnection()
         {
@@ -27,7 +27,7 @@ namespace KafeYonetim.Data
                 using (var result = command.ExecuteReader())
                 {
                     result.Read();
-                    var kafe = new Kafe((int)result["Id"], result["Ad"].ToString(), result["AcilisSaati"].ToString(), result["KapanisSaati"].ToString());
+                    var kafe = new Kafe((int)result["id"], result["Ad"].ToString(), result["AcilisSaati"].ToString(), result["KapanisSaati"].ToString());
                     kafe.Durum = (KafeDurum)result["Durum"];
 
                     return kafe;
@@ -94,13 +94,32 @@ namespace KafeYonetim.Data
             }
         }
 
-        public static List<Calisan> CalisanListesiniIsmeGoreFiltrele(string metin)
+        public static int CalisanFiltreleSayfaSayisiniGetir(string metin = "",decimal sayfadakiKayitSayisi = 20)
         {
             using (var connection = CreateConnection())
             {
-                var command = new SqlCommand("SELECT Calisan.*, CalisanGorev.GorevAdi FROM Calisan INNER JOIN CalisanGorev ON Calisan.GorevId = CalisanGorev.Id WHERE Calisan.Isim LIKE '%'+@metin+'%'", connection);
+                var command = new SqlCommand("CalisanFiltreSayfaSayisiHesapla ", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                command.Parameters.AddWithValue("@metin", metin);
+                command.Parameters.AddWithValue("@SayfadakiOgeSayisi", sayfadakiKayitSayisi);
+                command.Parameters.AddWithValue("@aranacak", metin);
+
+                int sayfaSayisi = Convert.ToInt32(command.ExecuteScalar());
+
+                return sayfaSayisi;
+            }
+        }
+
+        public static List<Calisan> CalisanListesiniIsmeGoreFiltrele(string metin = "",int sayfaNumarasi = 1, int sayfadakiKayitSayisi = 20)
+        {
+            using (var connection = CreateConnection())
+            {
+                var command = new SqlCommand("SayfaSayisinaGoreCalisanFiltreGetir", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@sayfaNumarasi", sayfaNumarasi);
+                command.Parameters.AddWithValue("@sayfadakiKayitSayisi", sayfadakiKayitSayisi);
+                command.Parameters.AddWithValue("@aranacak", metin);
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -108,9 +127,7 @@ namespace KafeYonetim.Data
 
                     while (reader.Read())
                     {
-                        var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
-
-                        calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
+                        var calisan = calisanOlustur(reader);
 
                         list.Add(calisan);
                     }
@@ -119,7 +136,13 @@ namespace KafeYonetim.Data
                 }
             }
         }
+        public static Calisan calisanOlustur(SqlDataReader reader)
+        {
+            var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
 
+            calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
+            return calisan;
+        }
         public static double GarsonBahsisToplami()
         {
             using (var connection = CreateConnection())
@@ -210,9 +233,7 @@ namespace KafeYonetim.Data
 
                     while (reader.Read())
                     {
-                        var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
-
-                        calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
+                        var calisan = calisanOlustur(reader);
 
                         list.Add(calisan);
                     }
