@@ -8,7 +8,7 @@ namespace KafeYonetim.Data
 
     public class DataManager
     {
-        private static string connStr = "Data Source=DESKTOP-SON6OA8;Initial Catalog=kafeYönetim;Integrated Security=True";
+        private static string connStr = "Data Source=DESKTOP-S3O5AOR;Initial Catalog=kafeYönetim;Integrated Security=True";
 
         private static SqlConnection CreateConnection()
         {
@@ -120,28 +120,29 @@ namespace KafeYonetim.Data
                 command.Parameters.AddWithValue("@sayfaNumarasi", sayfaNumarasi);
                 command.Parameters.AddWithValue("@sayfadakiKayitSayisi", sayfadakiKayitSayisi);
                 command.Parameters.AddWithValue("@aranacak", metin);
+                return calisanOlustur(command);
 
-                using (var reader = command.ExecuteReader())
-                {
-                    var list = new List<Calisan>();
-
-                    while (reader.Read())
-                    {
-                        var calisan = calisanOlustur(reader);
-
-                        list.Add(calisan);
-                    }
-
-                    return list;
-                }
+               
             }
         }
-        public static Calisan calisanOlustur(SqlDataReader reader)
+        public static List<Calisan> calisanOlustur(SqlCommand command)
         {
-            var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
+            using (var reader = command.ExecuteReader())
+            {
+                var list = new List<Calisan>();
 
-            calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
-            return calisan;
+                while (reader.Read())
+                {
+                    var calisan = new Calisan(reader["Isim"].ToString(), (DateTime)reader["IseGirisTarihi"], DataManager.AktifKafeyiGetir());
+
+                    calisan.Gorev.GorevAdi = reader["GorevAdi"].ToString();
+
+                    list.Add(calisan);
+                }
+
+                return list;
+            }
+
         }
         public static double GarsonBahsisToplami()
         {
@@ -227,19 +228,7 @@ namespace KafeYonetim.Data
                 command.Parameters.AddWithValue("@sayfaNumarasi", sayfaNumarasi);
                 command.Parameters.AddWithValue("@sayfadakiKayitSayisi", sayfadakiKayitSayisi);
 
-                using (var reader = command.ExecuteReader())
-                {
-                    var list = new List<Calisan>();
-
-                    while (reader.Read())
-                    {
-                        var calisan = calisanOlustur(reader);
-
-                        list.Add(calisan);
-                    }
-
-                    return list;
-                }
+                return calisanOlustur(command);
             }
         }
 
