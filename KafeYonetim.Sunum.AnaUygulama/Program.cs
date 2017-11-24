@@ -60,30 +60,36 @@ namespace KafeYonetim.Sunum.AnaUygulama
 
         private static void CalisanFiltrele()
         {
-            Console.Write("Bir metin giriniz: ");
-            string metin = Console.ReadLine();
-            List<Calisan> liste = DataManager.CalisanListesiniIsmeGoreFiltrele(metin);
-            int toplamSayfaSayisi = DataManager.CalisanFiltreleSayfaSayisiniGetir(metin);
-            int sayfaNumarasi = 1;
-
             while (true)
             {
-                CalisanListesiniEkranaYazdir(liste);
+                Console.Clear();
+                Console.Write("Bir metin giriniz: ");
+                string metin = Console.ReadLine();
+                List<Calisan> liste = DataManager.CalisanListesiniIsmeGoreFiltrele(metin);
+                int toplamSayfaSayisi = DataManager.CalisanFiltreleSayfaSayisiniGetir(metin);
+                int sayfaNumarasi = 1;
 
-                Console.WriteLine($"Sayfa: {sayfaNumarasi}/{toplamSayfaSayisi}");
-
-                sayfaNumarasi = SayfaNumarasiniOku(toplamSayfaSayisi);
-
-                if (sayfaNumarasi == -5484)
+                while (true)
                 {
-                    return;
-                }
+                    CalisanListesiniEkranaYazdir(liste);
 
-                liste = DataManager.CalisanListesiniIsmeGoreFiltrele(metin,sayfaNumarasi);
+                    Console.WriteLine($"Sayfa: {sayfaNumarasi}/{toplamSayfaSayisi}");
+
+                    sayfaNumarasi = SayfaNumarasiniOku(toplamSayfaSayisi);
+
+                    if (sayfaNumarasi == -5484)
+                    {
+                        return;
+                    }
+                    if (sayfaNumarasi == -1000)
+                    {
+                        break;
+                    }
+                                                       
+
+                    liste = DataManager.CalisanListesiniIsmeGoreFiltrele(metin, sayfaNumarasi);
+                } 
             }
-
-            
-
             
         }
 
@@ -164,15 +170,20 @@ namespace KafeYonetim.Sunum.AnaUygulama
 
         private static int SayfaNumarasiniOku(int toplamSayfaSayisi)
         {
+            var girdi = "";
             do
             {
-                Console.Write("\bSayfa numarası giriniz (çıkmak için h/H harfine basınız): ");
+                Console.Write("\bSayfa numarası giriniz (çıkmak için h/H harfine basınız // yeniden arama yapmak için a/A harfine basınız): ");
                 
-                var girdi = Console.ReadLine().ToUpper();
+                 girdi = Console.ReadLine().ToUpper();
 
                 if (girdi == "H")
                 {
                     return -5484;
+                }
+                if (girdi=="A")
+                {
+                    return -1000;
                 }
 
                 int sayfaNumarasi;
@@ -192,10 +203,10 @@ namespace KafeYonetim.Sunum.AnaUygulama
 
                 }
 
-                return sayfaNumarasi;
+               
             } while (true);
 
-
+            
         }
 
         private static void CalisanListesiniEkranaYazdir(List<Calisan> liste)
